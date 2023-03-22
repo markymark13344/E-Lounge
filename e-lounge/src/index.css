@@ -11,14 +11,11 @@ h1{
   font-family: 'Overpass', sans-serif;
 }
 
+
 .brandName{
   font-family: 'Overpass', 'Overpass';
   font-size: xx-large;
   font-weight: bold;
-}
-
-.navbar{
-  padding-right: 0px;
 }
 
 code {
