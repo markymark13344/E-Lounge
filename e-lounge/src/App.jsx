@@ -5,16 +5,26 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App">    
       <div>
-        <nav className="navbar navbar-dark d-flex flex-row border border-dark">
+      <div class="topnav">
           <div>
-          <a className="navbar-brand" href="/#">
-            <img className="brandLogo" src={logo} alt="logo"/>
-          </a>
-          <span className="brandName">E-LOUNGE</span>
+            <a className="navbar-brand" href="/#">
+              <img className="brandLogo" src={logo} alt="logo"/>
+            </a>
+       
           </div>
-        </nav>
+        <span className="brandName">E-LOUNGE</span>
+        <div class="topnav-right">
+          <a href="#feed">Feed</a>
+          <a href="#music">Music</a>
+          <a href="#news">News</a>
+          <a href="#games">Games</a>
+          <a href="#search">Search</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+
       </div>
 
       <BrowserRouter >
