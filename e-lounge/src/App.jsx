@@ -1,6 +1,7 @@
 import Landing from "./pages/Landing";
 import logo from './assets/images/E-lounge/android-chrome-192x192.png';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import Post from "./pages/Post";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <BrowserRouter >
         <Routes>
           <Route path='/' element={<Landing/>} />
+          <Route path='/post' element={<Post/>}/>
         </Routes>
       </BrowserRouter>
     </div>
