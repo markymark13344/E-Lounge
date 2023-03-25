@@ -1,0 +1,4 @@
+.logo:hover{
+   transition: 2.0s;
+   transform: rotate(360deg);
+}

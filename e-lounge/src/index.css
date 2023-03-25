@@ -12,6 +12,7 @@ h1{
 }
 
 
+
 .brandName{
   font-family: 'Overpass', 'Overpass';
   font-size: xx-large;
@@ -57,4 +58,24 @@ color: white;
 .topnav-right {
 float: right;
 
+}
+
+.post-editor{
+  margin: 0 20%;
+}
+
+.post-button{
+  float: right;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+li{
+  font-family: sans-serif;
+  font-size: 16pt;
+  
 }
