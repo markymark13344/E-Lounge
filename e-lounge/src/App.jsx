@@ -42,5 +42,3 @@ function App() {
 }
 
 export default App;
-
-<img className="LogoHeader d-inline-block" src={logo} alt="logo"/>
