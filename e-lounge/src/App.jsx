@@ -1,4 +1,5 @@
 import Landing from "./pages/Landing";
+import Register from "./pages/Register";
 import logo from './assets/images/E-lounge/android-chrome-192x192.png';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 
@@ -7,7 +8,7 @@ function App() {
   return (
     <div className="App">    
       <div>
-      <div class="topnav">
+      <div className="topnav">
           <div>
             <a className="navbar-brand" href="/#">
               <img className="brandLogo" src={logo} alt="logo"/>
@@ -15,7 +16,7 @@ function App() {
        
           </div>
         <span className="brandName">E-LOUNGE</span>
-        <div class="topnav-right">
+        <div className="topnav-right">
           <a href="#feed">Feed</a>
           <a href="#music">Music</a>
           <a href="#news">News</a>
@@ -30,6 +31,7 @@ function App() {
       <BrowserRouter >
         <Routes>
           <Route path='/' element={<Landing/>} />
+          <Route path='/Register' element={<Register/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
