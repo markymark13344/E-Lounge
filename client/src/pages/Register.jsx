@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react'
 import { Alert } from '../assets/components/Alert'
 import FormRow from '../assets/components/FormRow'
 import styled from 'styled-components'
+import { useAppContext } from '../Globals/appContext'
 
 
 //Initial value for Register page
@@ -11,7 +12,6 @@ const initiator = {
     email:'',
     password:'',
     isMember: true,
-    showAlert: false
 }
 
 
@@ -21,15 +21,22 @@ const Register = () => {
     setValues({...values,isMember:!values.isMember})
   }
 
+    const {isLoading,showAlert, displayAlert} = useAppContext()
+
     const [values,setValues] = useState(initiator)
 
     const receiveChange = (e) => {
-        console.log(e.target)
+        setValues({...values, [e.target.name]: e.target.value})
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target)
+        const {name,email,password,isMember} = values
+        if(!email || !password || (!isMember && !name)){
+          displayAlert()
+          return
+        }
+        console.log(values);
     }
 
 
@@ -39,7 +46,7 @@ const Register = () => {
         <div>
             <h3>{values.isMember ? "Login":"Register"}</h3>
             <form className='form' onSubmit={onSubmit}>
-                {values.showAlert && <Alert/>}
+                {showAlert && <Alert/>}
                 <div className='formContainer'>
 
 
