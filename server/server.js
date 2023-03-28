@@ -1,4 +1,5 @@
 import express from 'express'
+import 'express-async-errors'
 import dotenv from 'dotenv'
 import { connect } from 'mongoose'
 
@@ -28,7 +29,7 @@ import authRouter from './routes/authRoutes.js'
 app.use(express.json())
 
 app.get('/',(req,res)=>{
-    throw new Error('An Error has occured')
+    throw Error('error')
     res.send('Welcome!')
 })
 
@@ -37,6 +38,7 @@ app.use('/api/v1/auth',authRouter)
 
 //No Route Found
 app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 //Connect to Port
 const port = process.env.PORT || 5000
