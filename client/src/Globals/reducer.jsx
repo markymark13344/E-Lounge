@@ -1,5 +1,5 @@
 import React from 'react'
-import { DISPLAY_ALERT, CLEAR_ALERT } from './actions'
+import { DISPLAY_ALERT, CLEAR_ALERT, REGISTER_USER_BEGIN, REGISTRE_USER_ERROR, REGISTER_USER_SUCCESS } from './actions'
 
 export const reducer = (state,action) => {
     if(action.type === DISPLAY_ALERT){

@@ -21,7 +21,7 @@ const Register = () => {
     setValues({...values,isMember:!values.isMember})
   }
 
-    const {isLoading,showAlert, displayAlert} = useAppContext()
+    const {isLoading,showAlert, displayAlert, registerUser} = useAppContext()
 
     const [values,setValues] = useState(initiator)
 
@@ -35,6 +35,13 @@ const Register = () => {
         if(!email || !password || (!isMember && !name)){
           displayAlert()
           return
+        }
+        const currentUser = {name,email,password}
+        if(isMember){
+          console.log("Already a member");
+        }
+        else{
+          registerUser(currentUser)
         }
         console.log(values);
     }
@@ -59,7 +66,7 @@ const Register = () => {
 
 
 
-                <button type='submit'>submit</button> <br />
+                <button type='submit' disabled={isLoading}>submit</button> <br />
                 <p>
                   <button type='button' onClick={toggleMember}>
                     {values.isMember ? 'Register' : 'Login'}
