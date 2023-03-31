@@ -1,5 +1,6 @@
 import Landing from "./pages/Landing";
 import Register from "./pages/Register";
+import Post from "./pages/Post";
 import logo from './assets/images/E-lounge/android-chrome-192x192.png';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing/>} />
           <Route path='/Register' element={<Register/>}></Route>
+          <Route path='/Post' element={<Post/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
