@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Alert } from '../assets/components/Alert'
 import FormRow from '../assets/components/FormRow'
 import styled from 'styled-components'
@@ -16,14 +17,19 @@ const initiator = {
 
 
 const Register = () => {
+  const navigate = useNavigate()
+
+  const [values,setValues] = useState(initiator)
+
+  const {user,isLoading,showAlert, displayAlert, registerUser} = useAppContext()
 
   const toggleMember = () => {
     setValues({...values,isMember:!values.isMember})
   }
 
-    const {isLoading,showAlert, displayAlert, registerUser} = useAppContext()
+    
 
-    const [values,setValues] = useState(initiator)
+    
 
     const receiveChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
@@ -45,6 +51,12 @@ const Register = () => {
         }
         console.log(values);
     }
+
+    useEffect(() => {
+      if(user){
+        setTimeout(()=>{navigate('/')}, 3000)  
+      }
+    }, [user,navigate])
 
 
 
