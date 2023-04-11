@@ -21,7 +21,7 @@ const Register = () => {
 
   const [values,setValues] = useState(initiator)
 
-  const {user,isLoading,showAlert, displayAlert, registerUser} = useAppContext()
+  const {user,isLoading,showAlert, displayAlert, registerUser, loginUser, setupUser} = useAppContext()
 
   const toggleMember = () => {
     setValues({...values,isMember:!values.isMember})
@@ -44,10 +44,10 @@ const Register = () => {
         }
         const currentUser = {name,email,password}
         if(isMember){
-          console.log("Already a member");
+          setupUser({currentUser,endpoint:'login',alertText:'Login Successful! Redirecting...'})
         }
         else{
-          registerUser(currentUser)
+          setupUser({currentUser,endpoint:'register',alertText:'Register Successful! Redirecting...'})
         }
         console.log(values);
     }

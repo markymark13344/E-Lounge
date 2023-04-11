@@ -3,6 +3,7 @@ import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
+//User model
 const UserScheme = new mongoose.Schema({
     name: {type: String, required:[true,'Please Provide name'],
         minlength:3,
@@ -23,12 +24,20 @@ const UserScheme = new mongoose.Schema({
     },
 })
 
+//Presave user with hashed password
 UserScheme.pre('save', async function(){
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password,salt)
 })
 
+//create user token
 UserScheme.methods.createJWT = function () {
     return jwt.sign({userId:this._id},process.env.JWT_SECRET,{ expiresIn: process.env.JWT_LIFETIME})
+}
+
+//Compare user password with given password
+UserScheme.methods.comparePassword = async function(candidatePassword){
+    const isMatch = await bcrypt.compare(candidatePassword,this.password);
+    return isMatch
 }
 export default mongoose.model('User', UserScheme)

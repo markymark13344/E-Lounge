@@ -8,12 +8,15 @@ import notFoundMiddleware from './middleware/notfound.js'
 
 import connectDB from './db/connect.js'
 
+import morgan from 'morgan'
 
 
 
 
+//Pull env information
 dotenv.config()
 
+//Create express app
 const app = express()
 
 //middleware
@@ -26,6 +29,10 @@ import authRouter from './routes/authRoutes.js'
 
 
 //Routes
+if(process.env.NODE_ENV !== 'production'){
+    app.use(morgan('dev'))
+}
+
 app.use(express.json())
 
 app.get('/',(req,res)=>{
@@ -50,7 +57,7 @@ const port = process.env.PORT || 5000
 
 
 
-
+//Start method
 const start = async () => {
     try {
         await connectDB(process.env.MONGO_URL)
@@ -63,4 +70,5 @@ const start = async () => {
     }
 }
 
+//Start
 start()
