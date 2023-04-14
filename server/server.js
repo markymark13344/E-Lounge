@@ -3,6 +3,9 @@ import 'express-async-errors'
 import dotenv from 'dotenv'
 import { connect } from 'mongoose'
 
+import cors from 'cors'
+import bodyParser from 'body-parser'
+
 import errorHandlerMiddleware from './middleware/error.js'
 import notFoundMiddleware from './middleware/notfound.js'
 
@@ -18,6 +21,9 @@ dotenv.config()
 
 //Create express app
 const app = express()
+app.use(cors())
+app.use(bodyParser.json())
+
 
 //middleware
 notFoundMiddleware
@@ -25,6 +31,7 @@ errorHandlerMiddleware
 
 //Routers
 import authRouter from './routes/authRoutes.js'
+import spotifyRouter from './routes/spotifyRoutes.js'
 
 
 
@@ -46,6 +53,7 @@ app.get('/api/v1',(req,res)=>{
 
 
 app.use('/api/v1/auth',authRouter)
+app.use('/api/v1/Spotify', spotifyRouter)
 
 
 //No Route Found
