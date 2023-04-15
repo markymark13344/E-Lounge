@@ -21,7 +21,7 @@ const Register = () => {
 
   const [values,setValues] = useState(initiator)
 
-  const {user,isLoading,showAlert, displayAlert, registerUser, loginUser, setupUser} = useAppContext()
+  const {user,isLoading,showAlert, displayAlert, setupUser} = useAppContext()
 
   const toggleMember = () => {
     setValues({...values,isMember:!values.isMember})

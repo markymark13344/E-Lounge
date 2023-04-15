@@ -15,7 +15,10 @@ export default function AuthCode(code) {
             setExpiresIn(res.data.expiresIn)
             window.history.pushState({},null, "/")
         })
+
     },[code])
+
+   
 
     useEffect(() => {
         if (!refreshToken || !expiresIn) return
@@ -34,5 +37,8 @@ export default function AuthCode(code) {
         return () => clearInterval(interval)
         
     }, [refreshToken, expiresIn])
+
+    
+    return accessToken
     
 }
