@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import {Container, Form} from 'react-bootstrap'
 import SpotifyWebApi from 'spotify-web-api-node'
 import { TrackSearchResult } from '../assets/components/TrackSearchResult'
+import axios from 'axios'
 
 //Spotify API Connection
 const spotifyApi = new SpotifyWebApi({
@@ -24,7 +25,21 @@ export const Spotify = ({code}) => {
   function chooseTrack(track) {
     setPlayingTrack(track)
     setSearch('')
+    setLyrics('')
   }
+
+  useEffect(() => {
+    if (!playingTrack) return
+
+    axios.get('/api/v1/Spotify/Lyrics', {
+      params: {
+        track: playingTrack.title,
+        artist: playingTrack.artist
+      }
+    }).then(res => {
+      setLyrics(res.data.lyrics)
+    })
+  }, [playingTrack])
 
   //Set access token for api
   useEffect(() => {
@@ -80,7 +95,7 @@ export const Spotify = ({code}) => {
           ))}
           {searchResults.length === 0 && (
             <div className='text-center lyrics'>
-
+                {lyrics}
             </div>
           )}
         </div>

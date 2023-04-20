@@ -9,7 +9,7 @@ const Post = () => {
       <div>
         <div className="panel panel-default post-editor">
           <h2>Post Feed</h2>
-          <div class="panel-body">
+          <div className="panel-body">
           <textarea className="form-control"/>
           <button className="btn btn-primary post-button">Post</button>
           </div>

@@ -2,6 +2,7 @@ import User from '../models/user.js'
 import dotenv from 'dotenv'
 import { StatusCodes } from 'http-status-codes'
 import SpotifyWebApi from 'spotify-web-api-node'
+import lyricsFinder from 'lyrics-finder'
 import {BadRequestError, unauthenticatedError} from '../Errors/compiler.js'
 
 dotenv.config()
@@ -47,4 +48,9 @@ const refresh = async (req,res) => {
 
 }
 
-export {spotifyRegister, refresh}
+const lyrics = async (req,res) => {
+    const lyrics = await lyricsFinder(req.query.artist, req.query.track) || "No Lyrics Found"
+    res.json({lyrics})
+}
+
+export {spotifyRegister, refresh, lyrics}

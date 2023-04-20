@@ -50,7 +50,22 @@ const login = async  (req,res) => {
 }
 
 const updateUser = async  (req,res) => {
-    res.send('register user')
+    const {email,name} = req.body
+    if (!email || !name){
+        throw new BadRequestError('Value was missing')
+    }
+
+    const user = await User.findOne({_id:req.user.userId});
+
+    user.email = email
+    user.name = name
+
+    await user.save()
+
+    const token = user.createJWT
+
+    console.log(req.user)
+    res.status(StatusCodes.OK).json({user,token})
 }
 
 export {register,login,updateUser}
