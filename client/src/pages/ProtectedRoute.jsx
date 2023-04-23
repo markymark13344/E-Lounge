@@ -3,7 +3,7 @@ import { useAppContext } from '../Globals/appContext'
 import { Navigate } from 'react-router-dom'
 
 const ProtectedRoute = ({children}) => {
-  const {user} = useAppContext
+  const {user} = useAppContext()
   if(!user){
     return <Navigate to="/landing"/>
   }

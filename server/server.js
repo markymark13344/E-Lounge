@@ -9,6 +9,7 @@ import bodyParser from 'body-parser'
 
 import errorHandlerMiddleware from './middleware/error.js'
 import notFoundMiddleware from './middleware/notfound.js'
+import authenticateUser from './middleware/auth.js'
 
 import connectDB from './db/connect.js'
 
