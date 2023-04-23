@@ -32,7 +32,7 @@ errorHandlerMiddleware
 //Routers
 import authRouter from './routes/authRoutes.js'
 import spotifyRouter from './routes/spotifyRoutes.js'
-
+import postRouter from './routes/postRoutes.js'
 
 
 //Routes
@@ -54,7 +54,7 @@ app.get('/api/v1',(req,res)=>{
 
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/Spotify', spotifyRouter)
-
+app.use('/api/v1', postRouter)
 
 //No Route Found
 app.use(notFoundMiddleware)
