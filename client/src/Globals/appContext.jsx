@@ -4,7 +4,7 @@ import reducer from "./reducer";
 
 import axios from 'axios'
 
-import { DISPLAY_ALERT, CLEAR_ALERT,SETUP_USER_BEGIN,SETUP_USER_SUCCESS,SETUP_USER_ERROR  } from "./actions";
+import { DISPLAY_ALERT, CLEAR_ALERT,SETUP_USER_BEGIN,SETUP_USER_SUCCESS,SETUP_USER_ERROR, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR} from "./actions";
 
 const token = localStorage.getItem('token')
 const user = localStorage.getItem('user')
@@ -23,6 +23,28 @@ const AppContext = React.createContext()
 
 const AppProvider = ({children}) =>{
     const [state,dispatch] = useReducer(reducer,initialState)
+
+    //axios
+    const authFetch = axios.create({
+        baseURL:'/api/v1',
+    })
+    //Request
+    authFetch.interceptors.request.use((config)=> {
+        config.headers["Authorization"] = `Bearer ${state.token}`
+        return config
+    }, (error)=>{
+        return Promise.reject(error)
+    })
+    //Response
+    authFetch.interceptors.response.use((response)=> {
+        return response
+    }, (error)=>{
+        if(error.response && error.response.status === 401){
+            console.log('AUTH ERROR')
+        }
+        return Promise.reject(error)
+    })
+
 
     const displayAlert = () =>{
         dispatch({type:DISPLAY_ALERT})
@@ -60,7 +82,27 @@ const AppProvider = ({children}) =>{
         }
     }
 
-    return <AppContext.Provider value={{...state, displayAlert, setupUser}}>
+    const updateUser = async (currentUser) => {
+        dispatch({type: UPDATE_USER_BEGIN})
+        try{
+            const {data} = await authFetch.patch('/auth/updateUser', currentUser)
+
+            const {user, token} = data
+
+            dispatch({
+                type: UPDATE_USER_SUCCESS,
+                payload: {user, token}
+            })
+            addUsertoLocal({user, token})
+        } catch (error) {
+            dispatch({type: UPDATE_USER_ERROR, payload:{msg: error.response.data.msg}})
+        }
+        clearAlert()
+    }
+
+  
+
+    return <AppContext.Provider value={{...state, displayAlert, setupUser, updateUser}}>
         {children}
     </AppContext.Provider>
 }

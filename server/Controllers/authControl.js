@@ -1,6 +1,7 @@
 import User from "../models/user.js"
 import {StatusCodes} from 'http-status-codes'
 import {BadRequestError, unauthenticatedError} from '../Errors/compiler.js'
+import user from "../models/user.js"
 
 //Controllers
 const register = async (req,res) => {
@@ -49,8 +50,23 @@ const login = async  (req,res) => {
     res.status(StatusCodes.OK).json({user,token})
 }
 
-const updateUser = async  (req,res) => {
-    res.send('register user')
+const updateUser = async (req,res) => {
+    const { email, name } = req.body
+    
+
+    const user = await User.findOne({_id: req.user.userId})
+
+    console.log(user)
+
+    user.email = email
+    user.name = name
+
+    await user.save()
+
+    const token = user.createJWT()
+    res.status(StatusCodes.OK).json({
+        user, token,
+    })
 }
 
 export {register,login,updateUser}

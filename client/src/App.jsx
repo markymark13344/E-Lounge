@@ -4,6 +4,9 @@ import Register from "./pages/Register";
 import Post from "./pages/Post";
 import SpotifyLogin from "./pages/SpotifyLogin";
 import Spotify from "./pages/Spotify";
+import SharedLayout from "./pages/SharedLayout";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import Profile from "./pages/Profile";
 
 import logo from './assets/images/E-lounge/android-chrome-192x192.png';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
@@ -38,11 +41,14 @@ function App() {
 
       <BrowserRouter >
         <Routes>
-          <Route path='/' element={<Landing/>} />
+          <Route path="/" element={<ProtectedRoute><SharedLayout/></ProtectedRoute>}>
+            <Route path='/Post' element={<Post/>}></Route>
+            <Route path='/SpotifyRegister' element={<SpotifyLogin/>}></Route>
+            <Route path='/SpotifyDashboard' element={<Spotify code={spotifyInfo} />}></Route>
+            <Route path="/Profile" element={<Profile/>}></Route>
+          </Route>
+          <Route path='/landing' element={<Landing/>} />
           <Route path='/Register' element={<Register/>}></Route>
-          <Route path='/SpotifyRegister' element={<SpotifyLogin/>}></Route>
-          <Route path='/SpotifyDashboard' element={<Spotify code={spotifyInfo} />}></Route>
-          <Route path='/Post' element={<Post/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

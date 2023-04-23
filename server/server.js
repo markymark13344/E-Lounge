@@ -6,8 +6,10 @@ import { connect } from 'mongoose'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 
+
 import errorHandlerMiddleware from './middleware/error.js'
 import notFoundMiddleware from './middleware/notfound.js'
+import authenticateUser from './middleware/auth.js'
 
 import connectDB from './db/connect.js'
 
@@ -23,7 +25,7 @@ dotenv.config()
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
-
+app.use(bodyParser.urlencoded({extended: true}))
 
 //middleware
 notFoundMiddleware

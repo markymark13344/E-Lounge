@@ -20,6 +20,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-spotify-web-playback": "^0.13.4",
     "sass": "^1.58.3",
     "spotify-web-api-node": "^5.0.2",
     "styled-components": "^5.3.9",
