@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useAppContext } from '../Globals/appContext';
 import axios from 'axios'
 
 
@@ -30,29 +31,24 @@ const formats = [
 
 const Post = () => {
   const[title, setTitle] = useState('');
-  //const[summary, setSummary] = useState('');
   const[content, setContent] = useState('');
-  const[files, setFiles] = useState('');
 
-  function createNewPost(ev){
-    const data = new FormData()
-    data.set('title', title);  
-    data.set('content', content);
-    data.set('file', files[0]);
-    ev.preventDefault();
-    console.log(files);
-    axios.post('/api/v1/Post', data)
-  
-  };
+  const {showAlert,displayAlert,createPost,isLoading} = useAppContext()
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(!title || !content){
+        return
+    }
+    createPost({title,content})
+  }
+ 
   return (
     <Wrapper> 
-      <form onSubmit={createNewPost}>
+      <form onSubmit={handleSubmit}>
         <input type="text" placeholder={'Title'} value={title} onChange={ev => setTitle(ev.target.value)} /><br/>
-        
-        <input type="file" onChange={ev => setFiles(ev.target.files)}/><br/>
         <ReactQuill value={content} onChange={newValue => setContent(newValue)} modules={modules} formats={formats}/>
-        <button style={{marginTop:'5px'}}>Create Post</button>
+        <button style={{marginTop:'5px'}}>{isLoading?'Loading Please Wait':'Post'}</button>
 
       </form>
 

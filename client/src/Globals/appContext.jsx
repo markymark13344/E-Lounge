@@ -100,9 +100,17 @@ const AppProvider = ({children}) =>{
         clearAlert()
     }
 
+    const createPost = async (post) => {
+        try{
+            const {data} = await axios.post('/api/v1/Post',post)
+        } catch (error){
+            console.log(error.response.data.msg)
+        }
+    }
+
   
 
-    return <AppContext.Provider value={{...state, displayAlert, setupUser, updateUser}}>
+    return <AppContext.Provider value={{...state, displayAlert, setupUser, updateUser, createPost}}>
         {children}
     </AppContext.Provider>
 }
