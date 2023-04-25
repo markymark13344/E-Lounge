@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import useAuth from '../assets/components/useAuth.jsx'
+import useAuth from '../assets/components/Utility components/useAuth'
 
 
 const Landing = () => {

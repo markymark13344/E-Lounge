@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import FormRow from '../assets/components/FormRow'
-import Alert from '../assets/components/Alert'
+import FormRow from '../assets/components/Utility components/FormRow'
+import Alert from '../assets/components/Utility components/Alert'
 import { useAppContext } from '../Globals/appContext'
 import styled from 'styled-components'
 

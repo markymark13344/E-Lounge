@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Alert } from '../assets/components/Alert'
-import FormRow from '../assets/components/FormRow'
+import { Alert } from '../assets/components/Utility components/Alert'
+import FormRow from '../assets/components/Utility components/FormRow'
 import styled from 'styled-components'
 import { useAppContext } from '../Globals/appContext'
 
